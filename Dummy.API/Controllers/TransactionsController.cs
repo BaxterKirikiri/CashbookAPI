@@ -12,7 +12,7 @@ namespace Dummy.API.Controllers
     [ApiController]
     public class TransactionsController : ControllerBase
     {
-        private static List<Transaction> Transactions = new List<Transaction> { new Transaction(1, 200), new Transaction(2, 400) };
+        private static List<Transaction> Transactions = new List<Transaction> { };
 
         [HttpGet]
         public List<Transaction> GetAll()
