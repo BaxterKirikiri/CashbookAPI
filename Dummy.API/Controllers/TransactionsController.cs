@@ -20,14 +20,28 @@ namespace Dummy.API.Controllers
             return Transactions;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("type/{type}")]
+        public List<Transaction> GetAllType(String type)
+        {
+            List<Transaction> typeTransactions = new List<Transaction>();
+            foreach(Transaction t in Transactions)
+            {
+                if(t.TransactionType == type)
+                {
+                    typeTransactions.Add(t);
+                }
+            }
+            return typeTransactions;
+        }
+
+        [HttpGet("id/{id}")]
         public Transaction GetOne(int id)
         {
             return Transactions.Single(x => x.Id == id);
         }
 
         [HttpPost]
-        public void Create([FromBody] Transaction transaction)
+        public void Create([FromBody] Transaction transaction) //TODO: Refuse duplicate IDs
         {
             Transactions.Add(transaction);
         }

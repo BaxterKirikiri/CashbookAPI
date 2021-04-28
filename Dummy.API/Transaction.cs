@@ -11,7 +11,13 @@ namespace Dummy.API
         {
             Id = id;
             Sum = sum;
-            TransactionType = transactiontype;
+            if(transactiontype == "Income" || transactiontype == "Expense")
+            {
+                TransactionType = transactiontype;
+            } else
+            {
+                TransactionType = "Expense"; //More likely to add expenses than income.
+            }
         }
         public int Id { get; set; }
         public int Sum { get; set; }
