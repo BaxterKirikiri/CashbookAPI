@@ -23,15 +23,7 @@ namespace Dummy.API.Controllers
         [HttpGet("type/{type}")]
         public List<Transaction> GetAllType(String type)
         {
-            List<Transaction> typeTransactions = new List<Transaction>();
-            foreach(Transaction t in Transactions)
-            {
-                if(t.TransactionType == type)
-                {
-                    typeTransactions.Add(t);
-                }
-            }
-            return typeTransactions;
+            return Transactions.Where(x => x.TransactionType == type).ToList();
         }
 
         [HttpGet("id/{id}")]
@@ -43,6 +35,8 @@ namespace Dummy.API.Controllers
         [HttpPost]
         public void Create([FromBody] Transaction transaction) //TODO: Refuse duplicate IDs
         {
+            int highestId = FindHighestId();
+            transaction.Id = highestId + 1;
             Transactions.Add(transaction);
         }
 
@@ -57,6 +51,19 @@ namespace Dummy.API.Controllers
         {
             Transaction t = Transactions.Single(x => x.Id == id);
             t.Sum = transaction.Sum;
+        }
+
+        private int FindHighestId()
+        {
+            int highest = 0;
+            foreach (Transaction t in Transactions)
+            {
+                if(t.Id > highest)
+                {
+                    highest = t.Id;
+                }
+            }
+            return highest;
         }
     }
 }
