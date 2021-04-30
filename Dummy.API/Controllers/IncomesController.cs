@@ -12,18 +12,17 @@ namespace Dummy.API.Controllers
     [ApiController]
     public class IncomesController : ControllerBase
     {
-        private static List<Income> Incomes = new List<Income> { };
 
         [HttpGet]
         public List<Income> GetAll()
         {
-            return Incomes;
+            return Data.Incomes;
         }
 
         [HttpGet("{id}")]
         public Income GetOne(int id)
         {
-            return Incomes.Single(x => x.Id == id);
+            return Data.Incomes.Single(x => x.Id == id);
         }
 
         [HttpPost]
@@ -31,19 +30,19 @@ namespace Dummy.API.Controllers
         {
             int highestId = FindHighestId();
             transaction.Id = highestId + 1;
-            Incomes.Add(transaction);
+            Data.Incomes.Add(transaction);
         }
 
         [HttpDelete]
         public void Delete(int id)
         {
-            Incomes = Incomes.Where(x => x.Id != id).ToList();
+            Data.Incomes = Data.Incomes.Where(x => x.Id != id).ToList();
         }
 
         [HttpPut("{id}")]
         public void Update(int id, [FromBody] Income transaction)
         {
-            Income t = Incomes.Single(x => x.Id == id);
+            Income t = Data.Incomes.Single(x => x.Id == id);
             t.HourlyRate = transaction.HourlyRate;
             t.NumberOfHours = transaction.NumberOfHours;
         }
@@ -51,7 +50,7 @@ namespace Dummy.API.Controllers
         private int FindHighestId()
         {
             int highest = 0;
-            foreach (Income t in Incomes)
+            foreach (Income t in Data.Incomes)
             {
                 if(t.Id > highest)
                 {

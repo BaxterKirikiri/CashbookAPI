@@ -12,18 +12,17 @@ namespace Dummy.API.Controllers
     [ApiController]
     public class ExpensesController : ControllerBase
     {
-        private static List<Expense> Expenses = new List<Expense> { };
 
         [HttpGet]
         public List<Expense> GetAll()
         {
-            return Expenses;
+            return Data.Expenses;
         }
 
         [HttpGet("{id}")]
         public Expense GetOne(int id)
         {
-            return Expenses.Single(x => x.Id == id);
+            return Data.Expenses.Single(x => x.Id == id);
         }
 
         [HttpPost]
@@ -31,26 +30,26 @@ namespace Dummy.API.Controllers
         {
             int highestId = FindHighestId();
             transaction.Id = highestId + 1;
-            Expenses.Add(transaction);
+            Data.Expenses.Add(transaction);
         }
 
         [HttpDelete]
         public void Delete(int id)
         {
-            Expenses = Expenses.Where(x => x.Id != id).ToList();
+            Data.Expenses = Data.Expenses.Where(x => x.Id != id).ToList();
         }
 
         [HttpPut("{id}")]
         public void Update(int id, [FromBody] Expense transaction)
         {
-            Expense t = Expenses.Single(x => x.Id == id);
+            Expense t = Data.Expenses.Single(x => x.Id == id);
             t.AmmountInclGst = transaction.AmmountInclGst;
         }
 
         private int FindHighestId()
         {
             int highest = 0;
-            foreach (Expense t in Expenses)
+            foreach (Expense t in Data.Expenses)
             {
                 if(t.Id > highest)
                 {
