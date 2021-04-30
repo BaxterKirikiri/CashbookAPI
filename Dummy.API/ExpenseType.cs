@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Dummy.API
+﻿namespace Dummy.API
 {
     public enum ExpenseType
     {
