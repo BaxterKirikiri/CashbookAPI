@@ -20,12 +20,6 @@ namespace Dummy.API.Controllers
             return Expenses;
         }
 
-        [HttpGet("{type}")]
-        public List<Expense> GetByType(ExpenseType type)
-        {
-            return Expenses.Where(x => x.Type == type).ToList();
-        }
-
         [HttpGet("{id}")]
         public Expense GetOne(int id)
         {
