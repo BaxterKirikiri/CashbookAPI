@@ -15,5 +15,10 @@ namespace Dummy.API
         {
             return (ammountInclGst * 3)/23;
         }
+
+        public static decimal CalculateDeductible(decimal ammountInclGst)
+        {
+            return ammountInclGst - (CalculateGst(ammountInclGst));
+        }
     }
 }
