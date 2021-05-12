@@ -45,5 +45,15 @@ namespace Cashbook.Tests
             Assert.Equal(expectedGst, actualGst);
             Assert.Equal(expectedExclGst, actualExclGst);
         }
+
+        [Fact]
+        public void CalculateDeductibleTest()
+        {
+            decimal ammountInclGst = 115.0M;
+            decimal expectedDeductible = 100.0M;
+            decimal actualDeductible = BusinessRules.CalculateDeductible(ammountInclGst);
+
+            Assert.Equal(expectedDeductible, actualDeductible);
+        }
     }
 }
