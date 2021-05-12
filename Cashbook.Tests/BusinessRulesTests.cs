@@ -32,5 +32,18 @@ namespace Cashbook.Tests
             result = BusinessRules.IsTaxYear(testDate, 2021);
             Assert.True(result);
         }
+
+        [Fact]
+        public void CalculateGstTest()
+        {
+            decimal ammountInclGst = 115.0M;
+            decimal actualGst = BusinessRules.CalculateGst(ammountInclGst);
+            decimal expectedGst = 15.0M;
+            decimal actualExclGst = ammountInclGst - actualGst;
+            decimal expectedExclGst = ammountInclGst - expectedGst;
+
+            Assert.Equal(expectedGst, actualGst);
+            Assert.Equal(expectedExclGst, actualExclGst);
+        }
     }
 }
