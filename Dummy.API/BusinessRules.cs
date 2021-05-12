@@ -10,5 +10,10 @@ namespace Dummy.API
             var endDate = new DateTime(year, 3, 31);
             return date >= startDate && date <= endDate;
         }
+
+        public static decimal CalculateGst(decimal ammountInclGst)
+        {
+            return (ammountInclGst * 3)/23;
+        }
     }
 }
