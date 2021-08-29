@@ -23,8 +23,7 @@ namespace Dummy.API.Controllers
         [HttpPost]
         public void Create([FromBody] Income transaction) 
         {
-            int highestId = FindHighestId();
-            transaction.Id = highestId + 1;
+            transaction.Id = Data.Incomes.Max(x => x.Id) + 1;
             Data.Incomes.Add(transaction);
         }
 
@@ -40,19 +39,6 @@ namespace Dummy.API.Controllers
             Income t = Data.Incomes.Single(x => x.Id == id);
             t.HourlyRate = transaction.HourlyRate;
             t.NumberOfHours = transaction.NumberOfHours;
-        }
-
-        private int FindHighestId()
-        {
-            int highest = 0;
-            foreach (Income t in Data.Incomes)
-            {
-                if(t.Id > highest)
-                {
-                    highest = t.Id;
-                }
-            }
-            return highest;
         }
     }
 }
